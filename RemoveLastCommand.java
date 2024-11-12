@@ -9,6 +9,11 @@ public class RemoveLastCommand extends UndoCommand {
 
    @Override
    public void execute() {
-      // TODO: Type your code here
+      if(!sourceList.isEmpty()) {
+         // Check list is not empty before removing the last item
+         if (!sourceList.isEmpty()) {
+           sourceList.remove(sourceList.size() -1);
+         }
+      }
    }
 }
