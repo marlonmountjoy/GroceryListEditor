@@ -1,12 +1,22 @@
 import java.util.ArrayList;
 
 public class InsertAtCommand extends UndoCommand {
-   // TODO: Add field declarations here
+   private ArrayList<String> sourceList;
+   private String item;
+   private int index;
 
-   // TODO: Add constructor code here
+   // Constructor 
+   public InsertAtCommand(ArrayList<String> list, String item, int index) {
+      this.sourceList = list;
+      this.item = item;
+      this.index = index;
+   }
 
    @Override
    public void execute() {
-      // TODO: Type your code here
+      // Check if the index is in bounds and insert item at index
+      if (index >= 0 && index <= sourceList.size()) {
+         sourceList.add(index, item);
+      }
    }
 }

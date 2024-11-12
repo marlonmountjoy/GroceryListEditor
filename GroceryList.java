@@ -14,20 +14,38 @@ public class GroceryList {
    }
 
    public void removeAtWithUndo(int removalIndex) {
-      // TODO: Type your code here
+      // Check that the index is in bounds then get the item to be removed
+      if (removalIndex >= 0 && removalIndex < listItems.size()) {
+         String removedItem = listItems.get(removalIndex);
+         // Remove the item
+         listItems.remove(removalIndex);
+         // Undo 
+         undoStack.push(new InsertAtCommand(listItems, removedItem, removalIndex));
+      }
 
    }
 
    public void swapWithUndo(int index1, int index2) {
-      // TODO: Type your code here
+      // Check that indices are in bounds and not the same
+      if (index1 >= 0 && index1 < listItems.size() && index2 >= 0 && index2 < listItems.size() && index1 != index2) {
+         // Swap
+         String temp = listItems.get(index1);
+         listItems.set(index1, listItems.get(index2));
+         listItems.set(index2, temp);
+         // Undo
+         undoStack.push(new SwapCommand(listItems, index1, index2));
+      }
 
    }
 
    // Pop and execute the command at the top of the stack
    public void executeUndo() {
-      // TODO: Type Your code here
+      // Check stack is not empty and ^
+      if (!undoStack.isEmpty()) {
+         UndoCommand lastCommand = undoStack.pop();
+         lastCommand.execute();
+      }
    }
-
    public int getListSize() {
       return listItems.size();
    }
